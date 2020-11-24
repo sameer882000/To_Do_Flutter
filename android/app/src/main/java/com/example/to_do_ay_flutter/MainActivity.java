@@ -1,4 +1,4 @@
-package com.example.to_do_ay_flutter;
+package com.example.To_Do_Flutter;
 
 import io.flutter.embedding.android.FlutterActivity;
 
