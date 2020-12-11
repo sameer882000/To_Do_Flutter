@@ -1,21 +1,37 @@
 import 'package:To_Do_Flutter/screens/add_task_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:To_Do_Flutter/widgets/tasks_list.dart';
+import 'package:To_Do_Flutter/models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [Task(name: 'Buy milk'), Task(name: 'Buy eggs')];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Color(0xFFFFAC3E),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen(),
+            builder: (context) => AddTaskScreen(
+              // (newTaskTitle) {
+              //   setState(() {
+              //     tasks.add(
+              //       Task(name: newTaskTitle),
+              //     );
+              //   });
+              //   Navigator.pop(context);
+              // },
+            ),
           );
         },
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Color(0xFFFFAC3E),
         child: Icon(Icons.add),
       ),
       body: Column(
@@ -31,7 +47,7 @@ class TasksScreen extends StatelessWidget {
                   child: Icon(
                     Icons.list,
                     size: 30.0,
-                    color: Colors.lightBlueAccent,
+                    color: Color(0xFFFFAC3E),
                   ),
                   backgroundColor: Colors.white,
                   radius: 30.0,
@@ -72,7 +88,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              child: TasksList(),
+              child: TasksList(tasks),
             ),
           ),
         ],
