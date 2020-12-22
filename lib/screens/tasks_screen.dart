@@ -1,16 +1,10 @@
 import 'package:To_Do_Flutter/screens/add_task_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:To_Do_Flutter/widgets/tasks_list.dart';
-import 'package:To_Do_Flutter/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:To_Do_Flutter/models/task_data.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [Task(name: 'Buy milk'), Task(name: 'Buy eggs')];
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +15,13 @@ class _TasksScreenState extends State<TasksScreen> {
             context: context,
             builder: (context) => AddTaskScreen(
               (newTaskTitle) {
-                setState(
-                  () {
-                    tasks.add(
-                      Task(name: newTaskTitle),
-                    );
-                  });
-                Navigator.pop(context);
+                // setState(
+                //   () {
+                //     tasks.add(
+                //       Task(name: newTaskTitle),
+                //     );
+                //   });
+                // Navigator.pop(context);
               },
             ),
           );
@@ -57,7 +51,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  'To_Do',
+                  'To Do',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 50.0,
@@ -65,7 +59,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -89,7 +83,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
               ),
-              child: TasksList(tasks),
+              child: TasksList(),
             ),
           ),
         ],
