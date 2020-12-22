@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:To_Do_Flutter/models/task_data.dart';
+String newTaskTitle;
 class AddTaskScreen extends StatelessWidget {
-  final Function addTaskCallback;
-  AddTaskScreen(this.addTaskCallback);
-
   @override
   Widget build(BuildContext context) {
-    String newTaskTitle;
+    
+
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -14,7 +14,7 @@ class AddTaskScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
+              topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
           ),
         ),
@@ -25,28 +25,30 @@ class AddTaskScreen extends StatelessWidget {
               'Add Task',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFFFFAC3E),
-                fontSize: 25.0,
+                fontSize: 30.0,
+                color: Colors.lightBlueAccent,
               ),
             ),
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
-              onChanged: (newValue) {
-                print(newValue);
-                newTaskTitle = newValue;
+              onChanged: (newText) {
+                newTaskTitle = newText;
               },
             ),
             FlatButton(
-              onPressed: () {
-                addTaskCallback(newTaskTitle);
-              },
               child: Text(
                 'Add',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-              color: Color(0xFFFFAC3E),
-            )
+              color: Colors.lightBlueAccent,
+              onPressed: () {
+                Provider.of<TaskData>(context).addTask(newTaskTitle);
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),

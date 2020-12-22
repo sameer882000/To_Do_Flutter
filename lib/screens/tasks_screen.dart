@@ -8,26 +8,22 @@ class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFAC3E),
+      backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) => AddTaskScreen(
-              (newTaskTitle) {
-                // setState(
-                //   () {
-                //     tasks.add(
-                //       Task(name: newTaskTitle),
-                //     );
-                //   });
-                // Navigator.pop(context);
-              },
-            ),
-          );
-        },
-        backgroundColor: Color(0xFFFFAC3E),
+        backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => SingleChildScrollView(
+                    child:Container(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: AddTaskScreen(),
+                    )
+                )
+            );
+          }
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +38,7 @@ class TasksScreen extends StatelessWidget {
                   child: Icon(
                     Icons.list,
                     size: 30.0,
-                    color: Color(0xFFFFAC3E),
+                    color: Colors.lightBlueAccent,
                   ),
                   backgroundColor: Colors.white,
                   radius: 30.0,
@@ -51,7 +47,7 @@ class TasksScreen extends StatelessWidget {
                   height: 10.0,
                 ),
                 Text(
-                  'To Do',
+                  'To do',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 50.0,
@@ -59,10 +55,10 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${Provider.of<TaskData>(context).taskCount} tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18.0,
+                    fontSize: 18,
                   ),
                 ),
               ],
@@ -70,17 +66,12 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.0,
-              ),
-              height: 300.0,
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(
-                    (20.0),
-                  ),
+                  topRight: Radius.circular(20.0),
                 ),
               ),
               child: TasksList(),
